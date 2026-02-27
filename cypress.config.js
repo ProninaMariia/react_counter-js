@@ -1,43 +1,9 @@
-import React, { useState } from 'react';
+const { defineConfig } = require('cypress');
 
-export const App = () => {
-  const [count, setCount] = useState(0);
-
-  const addOne = () => {
-    setCount(prev => prev + 1);
-  };
-
-  const add100 = () => {
-    setCount(prev => prev + 100);
-  };
-
-  const increase = () => {
-    setCount(prev => {
-      const newValue = prev + 1;
-
-      if (newValue % 5 === 0) {
-        return newValue + 100;
-      }
-
-      return newValue;
-    });
-  };
-
-  return (
-    <div className="section">
-      <h1 className="title">{count}</h1>
-
-      <button type="button" onClick={addOne}>
-        Add 1
-      </button>
-
-      <button type="button" onClick={add100}>
-        Add 100
-      </button>
-
-      <button type="button" onClick={increase}>
-        Increase
-      </button>
-    </div>
-  );
-};
+module.exports = defineConfig({
+  e2e: {
+    baseUrl: 'http://localhost:3001',
+    specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
+    supportFile: false,
+  },
+});
